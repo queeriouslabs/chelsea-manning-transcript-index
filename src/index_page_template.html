@@ -1,0 +1,99 @@
+<html>
+
+  <head>
+    <base href="{{ base_url }}">
+    <style>
+      * {
+        font-family: monospace;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        overflow-y: scroll;
+      }
+
+      main {
+        width: 600px;
+      }
+
+      #volume-home-nav {
+        display: flex;
+        justify-content: center;
+        float: left;
+      }
+
+      #index-nav {
+        display: flex;
+        justify-content: center;
+        float: right;
+      }
+
+      #page-nav {
+        display: flex;
+        justify-content: center;
+      }
+
+      .clearer {
+        clear: both;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <h1><a href="https://archive.org/details/chelsea_manning_transcript">Transcript Home</a></h1>
+      </nav>
+      <div>
+        <h3 id="note-on-terms">Note on Terms</h3>
+        <p>
+          These terms are extracted from various dictionaries. During
+          processing, they were stripped of characters other than alphabetic
+          and numeric characters, underscores, hyphens, and apostrophes. The
+          same was done for the pages to be indexed. As a result, some terms
+          are found to occur in the documents when they in fact do not. For
+          example, "X Windows", which is found on a page with the text "x)
+          Windows Live Messenger".
+        </p>
+
+        <p>
+          Because these documents are intended to derive the index in a
+          manner that can be recreated by anyone, in order to ensure the
+          trustworthiness of the index, we do not remove or curate these
+          entries at all.
+        </p>
+
+        <p>
+          The dictionaries used for this were:
+        </p>
+
+        <ul id="dictionaries">
+          <li><b>Oxford Dictionary of Computer Science</b><br />ebook; 2016<br />ISBN 978-0-19-100288-5</li>
+          <li><b>DOD Dictionary of Military and Associated Terms</b><br />pdf; May 2019</br><a href="https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/dictionary.pdf?ver=2019-05-29-162249-290">https://www.jcs.mil/Portals/36/Documents/Doctrine/pubs/dictionary.pdf?ver=2019-05-29-162249-290</a></li>
+          <li><b>The Jargon File Glossary</b><br />webpage<br /><a href="http://catb.org/jargon/html/go01.html">http://catb.org/jargon/html/go01.html</a></li>
+          <li><b>NIST Glossary of Key Information Security Terms</b><br />pdf; May 2013</br><a href="https://csrc.nist.gov/publications/detail/nistir/7298/rev-2/final">https://csrc.nist.gov/publications/detail/nistir/7298/rev-2/final</a></li>
+        </ul>
+      </div>
+
+      {% for c in alphabetical_index %}
+      <h1>{{ c.upper() }}</h1>
+
+      <div class="row">
+        {% for column in alphabetical_index[c] %}
+        <ul>
+          {% for entry in column %}
+          <li>
+            <a href="{{ entry['url'] }}">{{ entry['link_text'] }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endfor %}
+      </div>
+      {% endfor %}
+
+    </main>
+  </body>
+
+</html>

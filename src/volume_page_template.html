@@ -1,0 +1,93 @@
+<html>
+
+  <head>
+    <base href="{{ base_url }}">
+    <style>
+      * {
+        font-family: monospace;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        overflow-y: scroll;
+      }
+
+      main {
+        width: 600px;
+      }
+
+      #volume-home-nav {
+        display: flex;
+        justify-content: center;
+        float: left;
+      }
+
+      #index-nav {
+        display: flex;
+        justify-content: center;
+        float: right;
+      }
+
+      #page-nav {
+        display: flex;
+        justify-content: center;
+      }
+
+      .clearer {
+        clear: both;
+      }
+
+    </style>
+    <script language="javascript">
+      function highlight_selected_term() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const highlight = urlParams.get('highlight');
+        const selected_terms = document.getElementsByClassName(highlight);
+        for (let i = 0; i < selected_terms.length; i++) {
+          selected_terms[i].style.backgroundColor = "#00dd00";
+          selected_terms[i].style.fontWeight = "bold";
+          selected_terms[i].parentNode.style.backgroundColor = "#ddffdd";
+        }
+        if (0 != selected_terms.length) {
+          selected_terms[0].parentNode.id = "highlighted";
+          window.location = window.location + "#highlighted"
+        }
+      }
+
+    </script>
+  </head>
+
+  <body onload="highlight_selected_term();">
+    <main>
+      <nav>
+        <div id="volume-home-nav">
+          <h1>
+            <a href="{{ volume_url }}">Volume {{ volume_number }} Home</a>
+          </h1>
+        </div>
+        <div id="index-nav">
+          <h1>
+            <a href="usvmanning-index/term_list.html">Back to Index</a>
+          </h1>
+        </div>
+        <div class="clearer"></div>
+        <div id="page-nav">
+          <h1>
+            {% if prev_page %}<a href="{{ prev_page['url'] }}">&lt;&lt; {{ prev_page['text'] }}</a> ..{% endif %}
+            {{ current_page }}
+            {% if next_page %}.. <a href="{{ next_page['url'] }}">{{ next_page['text'] }} &gt;&gt;</a>{% endif %}
+          </h1>
+
+          <!-- page_html += '\n ' + page_number_to_nav(page['page_number']) -->
+        </div>
+      </nav>
+
+      {% for par in paragraphs %}
+      <p>{% for classes, word in par %} {% if 0 == classes|length %}{{ word  }}{% else %}<span class="{{ classes|join(' ') }}">{{ word }}</span>{% endif %}{% endfor %}</p>
+      {% endfor %}
+
+    </main>
+  </body>
+
+</html>

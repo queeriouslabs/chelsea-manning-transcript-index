@@ -1,0 +1,67 @@
+<html>
+
+  <head>
+    <base href="{{ base_url }}">
+    <style>
+      * {
+        font-family: monospace;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        overflow-y: scroll;
+      }
+
+      main {
+        width: 600px;
+      }
+
+      #volume-home-nav {
+        display: flex;
+        justify-content: center;
+        float: left;
+      }
+
+      #index-nav {
+        display: flex;
+        justify-content: center;
+        float: right;
+      }
+
+      #page-nav {
+        display: flex;
+        justify-content: center;
+      }
+
+      .clearer {
+        clear: both;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <nav>
+        <h1><a href="https://archive.org/details/chelsea_manning_transcript">Transcript Home</a></h1>
+      </nav>
+
+      <h1>{{ term }}</h1>
+
+      <ul>
+        {% for vol_locs in info: %}
+        <li>
+          <p>Vol. {{ vol_locs[0] }}:
+            {% for loc in vol_locs[1]: %}
+            <a href="{{ loc['url'] }}">{{ loc['link_text'] }}</a>
+            {% endfor %}
+          </p>
+        </li>
+        {% endfor %}
+      </ul>
+
+    </main>
+  </body>
+
+</html>
