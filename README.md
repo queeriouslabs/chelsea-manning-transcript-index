@@ -14,7 +14,7 @@ This project generates an index for the [Chelsea Manning Trial Transcript](https
     - DOD Dictionary of Military and Associated Terms: Save as Accessible Text
     - NIST Glossary of Key Information Security Terms: Save as Plain Text (HTML/ASCII Encoding)
 4. Connect to the internet.
-5. From within `$DIR` the extractor script: `python3 src/run.py`. Follow the prompts.
+5. From within `$DIR` the extractor script: `python3 src/run.py`. Follow the prompts. To recreate the content on archive.org, pick your base url to be `https://archive.org/download/`
 
 The output of this whole process can be found in `$DIR/output`, and will have the following sort of structure:
 
