@@ -186,7 +186,7 @@ def main():
     except MissingPrerequisite:
         print()
         print()
-        print('Quitting due to failed prerequisites')
+        print('Quitting due to failed prerequisites.')
         print()
         time.sleep(1)
 
